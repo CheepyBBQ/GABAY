@@ -92,7 +92,7 @@ function account_page(string $role): void {
 <?php if ($role === 'student'): ?>
 <form method="post" class="panel">
   <h2>Your anonymous name</h2><input type="hidden" name="action" value="alias">
-  <p>In the Peer Circle, you appear as <strong><?= e($u['alias']) ?></strong>. Counselors and OSDS staff can read posts to keep everyone safe, but they only see this name.</p>
+  <p>In the Peer Circle and World Chat, you appear as <strong><?= e($u['alias']) ?></strong>. Counselors and OSDS staff can read posts to keep everyone safe, but they only see this name.</p>
   <button class="btn btn-quiet" type="submit">Get a new anonymous name</button>
 </form>
 <?php endif;

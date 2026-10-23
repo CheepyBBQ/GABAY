@@ -6,10 +6,30 @@ Campus mental health web app (PHP 8.1+ and MySQL/MariaDB, runs under XAMPP). Stu
 1. Copy this folder to `C:\xampp\htdocs\gabay` (macOS/Linux: `htdocs/gabay`).
 2. Start Apache and MySQL in the XAMPP control panel.
 3. Open phpMyAdmin, choose Import, and import `database/gabay.sql`. It creates the `gabay` database, the admin account and three counselor accounts (logins are in the README).
-4. If your folder is not named `gabay`, or MySQL has a password, edit `config.php`.
-5. Open `http://localhost/gabay/`. Starter admin: `admin@gabay.local` / `ChangeMe123!`. Change it after the first login.
+4. If your folder is not named `gabay`, or MySQL has a password, copy `config.local.example.php` to `config.local.php` and edit it. That file is ignored by Git, so your database login is never committed.
+5. Open `http://localhost/gabay/` and log in with one of the demo accounts below.
 
 Demo path: log in as admin, create a counselor, log in as that counselor and add slots, register a student, and book.
+
+## Demo accounts
+These are demo logins created by `database/gabay.sql`. They are public in this repository, so never reuse these passwords anywhere real, and change them before any real use.
+
+| Role | Email | Password |
+|---|---|---|
+| Admin | `admin@gabay.local` | `ChangeMe123!` |
+| Counselor | `maria.santos@gabay.local` | `Counselor123!` |
+| Counselor | `jose.reyes@gabay.local` | `Counselor123!` |
+| Counselor | `ana.cruz@gabay.local` | `Counselor123!` |
+
+Students register themselves on the login page.
+
+## Working on this as a team
+1. Clone the repo into `htdocs` (for example `git clone <repo-url> gabay`).
+2. Import `database/gabay.sql` into your own local MySQL and add your own `config.local.php` if your setup differs.
+3. Make changes on a branch (`git checkout -b feature/your-change`), commit, push, and open a pull request. Avoid committing straight to `main`.
+4. If you change the database structure, edit `database/gabay.sql` in the same pull request and say so in the description, so teammates know to re-import.
+
+Each person's database is separate. Only the structure and demo accounts in `gabay.sql` are shared through Git, never real data.
 
 ## Starting over
 Importing `database/gabay.sql` again deletes the `gabay` database and rebuilds it with only the four starter accounts, so use it whenever you want a clean slate.
@@ -22,9 +42,9 @@ gabay/
   logout.php
   database/gabay.sql      fresh-start database (wipes and rebuilds; includes the 4 starter accounts)
   includes/             bootstrap, db (PDO), auth (role guard), helpers (icons, charts), crisis, layout,
-                        toolkit, account (shared My account page), community (staff view of the Peer Circle)
+                        toolkit, account (shared My account page), community (staff view of the Peer Circle and World Chat)
   assets/css, assets/js
-  student/    dashboard (with Toolkit), appointments, book, mood, peer, account
+  student/    dashboard (with World Chat and Toolkit), appointments, book, mood, peer, account
   counselor/  dashboard (with Toolkit), slots, requests, flagged, community, account
   admin/      dashboard, counselors, admins, community, account
 ```
@@ -36,7 +56,7 @@ gabay/
 | Requests booked with them | | Yes (anonymous: reference code only) | No |
 | Private session notes | No | Own only | No |
 | Mood entries | Own only | No | Weekly averages only |
-| Peer Circle | Yes | Read all, aliases only, can hide | Read all, aliases only, cannot hide |
+| Peer Circle and World Chat | Yes | Read all, aliases only, can hide | Read all, aliases only, cannot hide |
 | Counselor account details | | Own | Name, title, email (hidden until shown); can edit and reset password |
 | Create, deactivate or delete accounts | | | Create counselors and admins; deactivate or reactivate counselors; delete admins |
 

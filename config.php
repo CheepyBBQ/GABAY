@@ -1,11 +1,16 @@
 <?php
-// URL path where the app lives. Folder htdocs/gabay => '/gabay'.
-define('BASE_URL', '/gabay');
+// Shared settings live in this file and ARE committed to Git.
+// Machine-specific settings (database login, URL path) go in config.local.php, which is NOT committed.
+// Copy config.local.example.php to config.local.php and edit it. Without it, the XAMPP defaults below are used.
+if (is_file(__DIR__ . '/config.local.php')) require __DIR__ . '/config.local.php';
 
-define('DB_HOST', '127.0.0.1');
-define('DB_NAME', 'gabay');
-define('DB_USER', 'root');
-define('DB_PASS', '');            // XAMPP default is empty
+// URL path where the app lives. Folder htdocs/gabay => '/gabay'.
+defined('BASE_URL') || define('BASE_URL', '/gabay');
+
+defined('DB_HOST') || define('DB_HOST', '127.0.0.1');
+defined('DB_NAME') || define('DB_NAME', 'gabay');
+defined('DB_USER') || define('DB_USER', 'root');
+defined('DB_PASS') || define('DB_PASS', '');            // XAMPP default is empty
 
 // Students must register with this email domain, e.g. 'school.edu.ph'. Empty = any email.
 define('SCHOOL_EMAIL_DOMAIN', '');

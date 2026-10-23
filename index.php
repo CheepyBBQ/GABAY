@@ -28,7 +28,7 @@ if (is_post()) {
             $errors['register'][] = 'Use your school email, which ends in @' . SCHOOL_EMAIL_DOMAIN . '.';
         if (strlen($pw) < 8) $errors['register'][] = 'Choose a password with at least 8 characters.';
         elseif ($pw !== $pw2) $errors['register'][] = 'The two passwords are different. Type the same password in both boxes.';
-        if (empty($_POST['consent'])) $errors['register'][] = 'Tick the box to confirm you understand that staff can read the Peer Circle.';
+        if (empty($_POST['consent'])) $errors['register'][] = 'Tick the box to confirm you understand that staff can read the Peer Circle and World Chat.';
         if (empty($errors['register'])) {
             if (q('SELECT 1 FROM users WHERE email = ?', [$email])->fetch()) {
                 $errors['register'][] = 'An account with that email already exists. Try logging in instead.';
@@ -102,7 +102,7 @@ render_header('Log in', '', null, true);
           </div>
           <input type="hidden" name="consent" id="consent-field" value="">
           <noscript><label class="consent"><input type="checkbox" name="consent" value="1" required>
-            <span>I have read the privacy notice and I agree. Counselors and OSDS staff can read the Peer Circle, where they only see my anonymous name.</span></label></noscript>
+            <span>I have read the privacy notice and I agree. Counselors and OSDS staff can read the Peer Circle and World Chat, where they only see my anonymous name.</span></label></noscript>
           <button class="btn btn-block" type="submit">Create my account</button>
         </form>
       </div>
@@ -118,9 +118,9 @@ render_header('Log in', '', null, true);
   <h2 id="consent-h">Before you create your account</h2>
   <p>Please read how GABAY uses your information.</p>
   <ul class="consent-points">
-    <li><strong>What we collect:</strong> your name, school email, mood check-ins, appointment requests, what you post in the Peer Circle, and notes your counselor writes after sessions.</li>
+    <li><strong>What we collect:</strong> your name, school email, mood check-ins, appointment requests, what you post or chat, and notes your counselor writes after sessions.</li>
     <li><strong>Why:</strong> only to run counseling appointments and keep students safe.</li>
-    <li><strong>Who can see it:</strong> your counselor sees your name and email only if you do not book anonymously. Counselors and OSDS staff can read the Peer Circle, where they only see your anonymous name. Only you can see your own mood check-ins, and OSDS sees combined totals only.</li>
+    <li><strong>Who can see it:</strong> your counselor sees your name and email only if you do not book anonymously. Counselors and OSDS staff can read the Peer Circle and World Chat, where they only see your anonymous name. Only you can see your own mood check-ins, and OSDS sees combined totals only.</li>
     <li><strong>Your rights:</strong> you can ask <?= e(PRIVACY_CONTACT) ?> to see, correct, or delete your information.</li>
   </ul>
   <p class="small muted">This notice is given under the Data Privacy Act of 2012 (Republic Act No. 10173).</p>

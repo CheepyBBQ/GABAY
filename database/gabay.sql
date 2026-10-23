@@ -17,7 +17,7 @@ CREATE TABLE users (
   title VARCHAR(80) NULL,                   -- counselors only: shown to students when booking
   must_change_password TINYINT(1) NOT NULL DEFAULT 0,  -- set when an admin creates or resets the account
   is_active TINYINT(1) NOT NULL DEFAULT 1,  -- 0 = deactivated: cannot log in, but history is kept
-  consented_at DATETIME NULL,               -- students: when they agreed that staff can read the Peer Circle
+  consented_at DATETIME NULL,               -- students: when they agreed that staff can read the Peer Circle and World Chat
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB;
 
@@ -63,6 +63,7 @@ CREATE TABLE posts (
   id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   student_id INT UNSIGNED NOT NULL,
   parent_id INT UNSIGNED NULL,              -- NULL = top-level post, otherwise a reply
+  kind ENUM('post','chat') NOT NULL DEFAULT 'post',  -- 'chat' = World Chat message
   body VARCHAR(1000) NOT NULL,
   is_flagged TINYINT(1) NOT NULL DEFAULT 0,
   flag_source ENUM('crisis','report') NULL,
@@ -70,6 +71,7 @@ CREATE TABLE posts (
   is_hidden TINYINT(1) NOT NULL DEFAULT 0,
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   KEY idx_board (parent_id, is_hidden, created_at),
+  KEY idx_chat (kind, is_hidden, id),
   KEY idx_queue (is_flagged, review_state, is_hidden),
   FOREIGN KEY (student_id) REFERENCES users(id) ON DELETE CASCADE,
   FOREIGN KEY (parent_id) REFERENCES posts(id) ON DELETE CASCADE

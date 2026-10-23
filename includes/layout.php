@@ -12,13 +12,13 @@ function nav_items(string $role): array {
             'slots' => ['My Slots', 'counselor/slots.php', 'clock'],
             'requests' => ['Requests', 'counselor/requests.php', 'inbox'],
             'flagged' => ['Flagged Posts', 'counselor/flagged.php', 'flag'],
-            'community' => ['Peer Circle', 'counselor/community.php', 'users'],
+            'community' => ['Community', 'counselor/community.php', 'users'],
         ],
         'admin' => [
             'dashboard' => ['Dashboard', 'admin/dashboard.php', 'dashboard'],
             'counselors' => ['Counselor Accounts', 'admin/counselors.php', 'userplus'],
             'admins' => ['Admin Accounts', 'admin/admins.php', 'shield'],
-            'community' => ['Peer Circle', 'admin/community.php', 'users'],
+            'community' => ['Community', 'admin/community.php', 'users'],
         ],
         default => [],
     };

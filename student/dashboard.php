@@ -39,5 +39,20 @@ render_header('Dashboard', 'dashboard', $u); ?>
 </div>
 
 
+<section class="panel" id="world-chat" aria-labelledby="chat-h">
+  <h2 id="chat-h">World Chat</h2>
+  <p class="muted small">Open chat for every student. You appear as <strong><?= e($u['alias']) ?></strong>. Counselors and OSDS staff can read this chat to keep everyone safe, and they only see your anonymous name.</p>
+  <div id="chat-log" class="chat-log" role="log" aria-live="polite" aria-label="World Chat messages" tabindex="0">
+    <p class="empty">Loading messages...</p>
+  </div>
+  <form id="chat-form" class="chat-form" autocomplete="off" data-api="<?= e(url('student/chat_api.php')) ?>">
+    <label for="chat-input" class="sr-only">Your message</label>
+    <input id="chat-input" type="text" maxlength="300" required placeholder="Say something kind...">
+    <button class="btn" type="submit">Send message</button>
+  </form>
+  <p id="chat-error" class="small" role="alert" style="color:var(--bad)" hidden></p>
+  <p class="hint">Be kind and keep names and personal details out. This is peer chat, not professional care.</p>
+</section>
+
 <?php render_toolkit(true); ?>
-<?php render_footer();
+<?php render_footer(['assets/js/chat.js']);

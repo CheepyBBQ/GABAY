@@ -1411,3 +1411,89 @@ html:not(.js) .tabs {
   background: var(--blue);
   border-color: var(--blue);
 }
+
+
+/* world chat */
+.chat-log {
+  height: 340px;
+  overflow-y: auto;
+  border: 1.5px solid var(--line);
+  border-radius: 10px;
+  background: var(--tint-2);
+  padding: .6rem .8rem;
+  margin-bottom: .8rem;
+}
+
+.chat-msg {
+  padding: .4rem 0;
+}
+
+.chat-head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .1rem .6rem;
+  align-items: baseline;
+}
+
+.chat-head b {
+  color: var(--blue-dark);
+}
+
+.chat-msg.mine .chat-head b {
+  color: var(--ink);
+}
+
+.chat-body {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.chat-report {
+  margin-left: auto;
+  background: none;
+  border: 0;
+  color: var(--muted);
+  font: inherit;
+  font-size: .88rem;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: .3rem .4rem;
+  min-height: 32px;
+}
+
+.chat-report:hover {
+  color: var(--blue-dark);
+}
+
+.chat-report:disabled {
+  text-decoration: none;
+  cursor: default;
+}
+
+.chat-form {
+  display: flex;
+  gap: .6rem;
+}
+
+.chat-form input {
+  flex: 1;
+}
+
+.chat-hide {
+  display: inline;
+  margin: 0 0 0 auto;
+}
+
+.chat-hide .chat-report {
+  margin-left: 0;
+}
+
+@media (max-width: 520px) {
+  .chat-form {
+    flex-direction: column;
+  }
+
+  .chat-log {
+    height: 300px;
+  }
+}

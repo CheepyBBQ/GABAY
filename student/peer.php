@@ -9,7 +9,7 @@ if (is_post()) {
         $parent = $action === 'reply' ? (int)($_POST['parent_id'] ?? 0) : null;
         if ($body === '' || mb_strlen($body) > 1000) {
             flash('error', 'Write something first. Posts can be up to 1000 characters.');
-        } elseif ($parent !== null && !q('SELECT 1 FROM posts WHERE id = ? AND parent_id IS NULL AND is_hidden = 0', [$parent])->fetch()) {
+        } elseif ($parent !== null && !q('SELECT 1 FROM posts WHERE id = ? AND parent_id IS NULL AND kind = \'post\' AND is_hidden = 0', [$parent])->fetch()) {
             flash('error', 'That post is no longer available.');
         } else {
             $crisis = has_crisis_language($body);
@@ -32,7 +32,7 @@ if (is_post()) {
 }
 
 $posts = q('SELECT p.id, p.body, p.created_at, p.student_id, u.alias FROM posts p JOIN users u ON u.id = p.student_id
-            WHERE p.parent_id IS NULL AND p.is_hidden = 0 ORDER BY p.created_at DESC LIMIT 30')->fetchAll();
+            WHERE p.parent_id IS NULL AND p.kind = \'post\' AND p.is_hidden = 0 ORDER BY p.created_at DESC LIMIT 30')->fetchAll();
 $replies = [];
 if ($posts) {
     $in = implode(',', array_fill(0, count($posts), '?'));
